@@ -16,7 +16,7 @@ export class BasicosComponent implements OnInit {
   @ViewChild('miFormulario') miFormulario!: NgForm;
 
   nombreValido():boolean{
-     return this.miFormulario?.controls.producto?.invalid && this.miFormulario?.controls.producto?.touched
+     return this.miFormulario?.controls.producto?.invalid && this.miFormulario?.controls.producto?.touched;
   }
 
   precioValido(): boolean {
