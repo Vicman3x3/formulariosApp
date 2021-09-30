@@ -12,4 +12,8 @@ export class DinamicosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  hola(){
+    console.log('hola')
+  }
+
 }
