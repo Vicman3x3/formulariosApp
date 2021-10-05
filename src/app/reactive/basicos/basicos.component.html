@@ -1,9 +1,9 @@
 <h2>Reactivos: Básicos</h2>
 <hr />
 
-<div class="row">
+<div class="row p-5">
     <div class="col">
-        <form autocomplete="off" [formGroup]="miFormulario">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()" >
 
             <!-- Campo del producto -->
             <div class="row mb-3">
@@ -15,7 +15,11 @@
                           placeholder="nombre del producto"
                           formControlName="nombre"
                           />
-                    <span class="form-text text-danger">Debe de ser de letras</span>
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="campoEsValido('nombre')"
+
+                    >Debe de ser de más de letras</span>
                 </div>
             </div>
 
@@ -29,7 +33,9 @@
                           placeholder="precio del producto"
                           formControlName="precio"
                     />
-                    <span class="form-text text-danger"
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="campoEsValido('precio')"
                           >El precio debe ser 0 ó Mayor
                     </span>
                 </div>
@@ -45,6 +51,11 @@
                           placeholder="Existencias del producto"
                           formControlName="existencias"
                     />
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="campoEsValido('existencias')"
+                    >Las existencias deben ser 0 ó Mayor
+                    </span>
                 </div>
             </div>
 
@@ -53,7 +64,7 @@
                     <button
                         type="submit"
                         class="btn btn-primary float-end"
-                        [disabled]="miFormulario.invalid"
+
                         >
                           Guardar
                       </button>
@@ -76,5 +87,8 @@
 
         <span>Value</span>
         <pre>{{miFormulario.value | json}}</pre>
+
+        <span>Precio</span>
+        <pre>{{miFormulario.controls.precio.errors  | json}}</pre>
     </div>
 </div>
