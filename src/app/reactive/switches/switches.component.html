@@ -1,54 +1,80 @@
 <h2>Reactivos: Switches</h2>
 <hr />
 
-<form>
-  <!-- Radios -->
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label"> Género </label>
-    <div class="col-sm-9">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" value="M" name="radioGenero" id="radioMasculino" required />
-        <label class="form-check-label" for="radioMasculino"> Masculino </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" value="F" name="radioGenero" id="radioFemenino" />
-        <label class="form-check-label" for="radioFemenino"> Femenino </label>
-      </div>
-    </div>
-  </div>
+<form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+    <!-- Radios -->
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label"> Género </label>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    value="M"
 
-  <!-- Swuitch -->
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label"> Notificaciones </label>
-    <div class="col-sm-9">
-      <div class="form-check form-switch mt-2">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" />
-        <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
-      </div>
-    </div>
-  </div>
-  <!-- Check -->
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label"> </label>
-    <div class="col-sm-9">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
-        <label class="form-check-label" for="flexCheckDefault">
-          Términos y condiciones
-        </label>
-      </div>
-    </div>
-  </div>
+                    id="radioMasculino"
+                    formControlName="genero"
+                />
+                <label class="form-check-label" for="radioMasculino"> Masculino </label>
+            </div>
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    value="F"
 
-  <!-- boton submit -->
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-primary float-end">Guardar</button>
+                    id="radioFemenino"
+                    formControlName="genero"
+                />
+                <label class="form-check-label" for="radioFemenino"> Femenino </label>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <!-- Swuitch -->
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label"> Notificaciones </label>
+        <div class="col-sm-9">
+            <div class="form-check form-switch mt-2">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckChecked"
+                    formControlName="notificaciones"
+                />
+                <label
+                    class="form-check-label"
+                    for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
+            </div>
+        </div>
+    </div>
+    <!-- Check -->
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label"> </label>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexCheckDefault"
+                    formControlName="condiciones"
+                    />
+                <label class="form-check-label" for="flexCheckDefault">
+                    Términos y condiciones
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- boton submit -->
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-primary float-end" type="submit">Guardar</button>
+      </div>
+    </div>
 </form>
 
-<!-- <h5>Valor del formulario</h5>
+<h5>Valor del formulario</h5>
 <pre>{{miFormulario.value | json}}</pre>
 <br>
 
@@ -60,7 +86,7 @@
 <pre>{{miFormulario.valid}}</pre>
 <br>
 
-<h5>Terminos</h5>
+<!-- <h5>Terminos</h5>
 <pre>{{miFormulario.controls?.terminos?.errors | json}}</pre>
 <br>
 

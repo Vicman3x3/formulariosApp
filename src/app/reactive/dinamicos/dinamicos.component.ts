@@ -1,29 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
   templateUrl: './dinamicos.component.html',
-  styleUrls: ['./dinamicos.component.css']
+  styleUrls: ['./dinamicos.component.css'],
 })
 export class DinamicosComponent implements OnInit {
+  constructor(private fb: FormBuilder) {}
 
-  constructor( private fb: FormBuilder ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
+  nuevoFavorito: FormControl = this.fb.control('', Validators.required);
 
   miFormulario: FormGroup = this.fb.group({
-    nombre:     ['',[Validators.required,Validators.minLength(3)]],
-    favoritos:  this.fb.array([
-      [ 'Metal Gear', Validators.required],
-      [ 'Carlos Duty' , Validators.required],
-      [ 'Smash Bros' , Validators.required],
-    ],Validators.required)
-
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    favoritos: this.fb.array(
+      [
+        ['Metal Gear', Validators.required],
+        ['Carlos Duty', Validators.required],
+        ['Smash Bros', Validators.required],
+      ],
+      Validators.required
+    ),
   });
 
-  get favoritosArr(){
+  get favoritosArr() {
     return this.miFormulario.get('favoritos') as FormArray;
   }
 
@@ -32,6 +40,16 @@ export class DinamicosComponent implements OnInit {
       this.miFormulario.controls[campo].errors &&
       this.miFormulario.controls[campo].touched
     );
+  }
+
+  agregarFavorito() {
+    if (this.nuevoFavorito.invalid) {
+      return;
+    }
+
+    // this.favoritosArr.push(new FormControl(this.nuevoFavorito.value, Validators.required));
+    this.favoritosArr.push(this.fb.control(this.nuevoFavorito.value, Validators.required));
+    this.nuevoFavorito.reset();
   }
 
   guardar() {
@@ -43,12 +61,8 @@ export class DinamicosComponent implements OnInit {
     this.miFormulario.reset();
   }
 
-
-
-  hola(){
-    console.log('hola')
+  borrar(index:number) {
+    this.favoritosArr.removeAt(index);
+    // this..favoritos.splice(index,1);
   }
-
-
-
 }
